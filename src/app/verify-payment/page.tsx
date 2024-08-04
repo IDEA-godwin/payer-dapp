@@ -5,10 +5,7 @@ import {useSearchParams} from "next/navigation";
 import {verifyPayment} from "~/app/actions";
 import {
   approveSpend,
-  getAccount,
-  getDaiWalletBalance,
-  getDefaultBridgeAddress,
-  getWalletBalance, pay
+  getAccount, pay
 } from "~/helper/contract";
 
 
@@ -29,7 +26,7 @@ export default function Page() {
         return;
       }
       setAmount(data.amount / 100);
-      const amount = (data.amount / 100) / 1600.00;
+      const amount = (data.amount / 100) / convert_rate;
       const acct = getAccount();
       if (!acct) return;
 
@@ -39,7 +36,7 @@ export default function Page() {
       }, err => alert("could not approve transaction, contact developer for aid"));
     }
     const ref = params.get('trxref');
-    if (ref) verify(ref); else setLoading(false);
+    if (ref) verify(ref).then(); else setLoading(false);
   }, []);
 
   return (

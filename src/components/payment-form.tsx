@@ -76,12 +76,6 @@ export default function PaymentForm() {
                         <input {...register('amount', {required: true})} className="form-control" required/>
                         <div className="invalid-feedback">Please enter the Amount due.</div>
                       </div>
-                      {/*<div className="col-md-12 disabled">*/}
-                      {/*  <label htmlFor="disabledSelect" className="form-label">Payment To</label>*/}
-                      {/*  <select {...register('vendor')} id="disabledSelect" className="form-select">*/}
-                      {/*    <option>TechandSun_NG</option>*/}
-                      {/*  </select>*/}
-                      {/*</div>*/}
                       <div className="col-12">
                         <div className="form-check">
                           <input className="form-check-input" type="checkbox" value="" id="companyCheckagree" required/>

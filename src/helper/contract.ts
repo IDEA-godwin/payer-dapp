@@ -1,8 +1,6 @@
 import {Web3} from "web3";
 import relayer_abi from "./relayer-abi.json";
 import dai_abi from "./dai-abi.json";
-import {Web3Account} from "web3-eth-accounts";
-import {promises} from "node:dns";
 
 const relayer_contract_address = process.env.NEXT_PUBLIC_RELAYER_CONTRACT_ADDRESS;
 const dai_contract_address = process.env.NEXT_PUBLIC_DAI_CONTRACT_ADDRESS;
