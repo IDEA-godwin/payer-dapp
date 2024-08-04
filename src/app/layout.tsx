@@ -18,40 +18,25 @@ export default function RootLayout({children}: Readonly<{ children: React.ReactN
 
   return (
     <html lang="en">
-    <Head>
-      <link ref={'stylesheet'} href={'/libs/glightbox/dist/css/glightbox.min.css'}/>
-      <Link rel={'stylesheet'} href={'/css/theme.min.css'}/>
-      {/*// <!-- Libs CSS -->*/}
-      <link href={'/libs/simplebar/dist/simplebar.min.css'} rel="stylesheet"/>
-      <link href={'/libs/bootstrap-icons/font/bootstrap-icons.min.css'} rel="stylesheet"/>
+      <Head>
+        <link ref={'stylesheet'} href={'/libs/glightbox/dist/css/glightbox.min.css'}/>
+        <Link rel={'stylesheet'} href={'/css/theme.min.css'}/>
+        {/*// <!-- Libs CSS -->*/}
+        <link href={'/libs/simplebar/dist/simplebar.min.css'} rel="stylesheet"/>
+        <link href={'/libs/bootstrap-icons/font/bootstrap-icons.min.css'} rel="stylesheet"/>
 
-      {/*// <!-- Scroll Cue -->*/}
-      <link rel={'stylesheet'} href={'/libs/scrollcue/scrollCue.css'}/>
+        {/*// <!-- Scroll Cue -->*/}
+        <link rel={'stylesheet'} href={'/libs/scrollcue/scrollCue.css'}/>
 
-      {/*// <!-- Box icons -->*/}
-      <link rel={'stylesheet'} href={'/fonts/css/boxicons.min.css'}/>
-    </Head>
-    <body className={inter.className}>
-    {children}
+        {/*// <!-- Box icons -->*/}
+        <link rel={'stylesheet'} href={'/fonts/css/boxicons.min.css'}/>
+      </Head>
+      <body className={inter.className}>
+        {children}
 
-    <Script src={'/js/vendors/color-modes.js'}/>
-    <Script src={'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js'}/>
-    {/*<Script src={'/libs/glightbox/dist/js/glightbox.min.js'}></Script>*/}
-    {/*<Script src={'/js/vendors/glight.js'}></Script>*/}
-    {/*<Script src={'/libs/scrollcue/scrollCue.min.js'}></Script>*/}
-    {/*<script src="assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*/}
-    {/*<script src="assets/libs/simplebar/dist/simplebar.min.js"></script>*/}
-    {/*<script src="assets/libs/headhesive/dist/headhesive.min.js"></script>*/}
-
-    {/*<Script src={'/libs/jarallax/dist/jarallax.min.js'}></Script>*/}
-    {/*<Script src={'/js/vendors/jarallax.js'}></Script>*/}
-    {/*<Script src={'/libs/parallax-js/dist/parallax.min.js'}></Script>*/}
-    {/*<Script src={'/js/vendors/parallax.js'}></Script>*/}
-
-    <Script src={'/libs/scrollcue/scrollCue.min.js'}>
-      scrollCue.init();
-    </Script>
-    </body>
+        <Script src={'/js/vendors/color-modes.js'}/>
+        <Script src={'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js'}/>
+      </body>
     </html>
   )
 }

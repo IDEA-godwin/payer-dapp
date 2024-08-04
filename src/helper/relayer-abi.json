@@ -5,8 +5,8 @@
     "outputs": [
       {
         "internalType": "address",
-        "name": "",
-        "type": "address"
+        "type": "address",
+        "name": ""
       }
     ],
     "stateMutability": "view",
