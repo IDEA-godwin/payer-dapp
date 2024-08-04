@@ -6,6 +6,7 @@ import "./globals.css";
 import Script from "next/script";
 import Head from "next/head";
 import Link from "next/link";
+import Header from "~/components/header";
 
 const inter = Inter({subsets: ["latin"]});
 

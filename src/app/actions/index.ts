@@ -38,5 +38,7 @@ export const verifyPayment = async (reference: string) => {
     headers
   });
   const res = await fetch(req);
+  console.log(res.ok);
+  if (!res.ok) return false;
   return await res.json();
 }
