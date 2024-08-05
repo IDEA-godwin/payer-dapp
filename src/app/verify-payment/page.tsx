@@ -7,6 +7,7 @@ import {
   approveSpend,
   getAccount, pay
 } from "~/helper/contract";
+import Link from "next/link";
 
 
 export default function Page() {
@@ -30,21 +31,25 @@ export default function Page() {
   }, []);
 
   const verify = async (reference: string) => {
+    console.log('verifying paystack transaction with reference: ', reference);
     const res = await verifyPayment(reference);
     const data = res ? res.data : null;
     if (!data || data.status !== 'success') {
+      console.log('paystack verification failed')
       setLoading(false);
       return;
     }
+    console.log('paystack verification successful')
     setAmount(data.amount / 100);
     const amount = (data.amount / 100) / convert_rate;
     const acct = getAccount();
     if (!acct) return;
 
-    // approveSpend(acct.address, amount).then(async () => {
-    //   await pay(acct.address, data.metadata.meter_id, amount);
-    //   setSuccess(true);
-    // }, err => alert("could not approve transaction, contact developer for aid"));
+    approveSpend(acct.address, amount).then(async () => {
+      await pay(acct.address, data.metadata.meter_id, amount);
+      setSuccess(true);
+      setLoading(false);
+    }, err => alert("could not approve transaction, contact developer for aid"));
   }
 
   const handleSubmit = async (event: any) => {
@@ -65,7 +70,7 @@ export default function Page() {
   const whenTrxref = () => (
     <>
       <div className={'text-center'}>
-        <h3>Thank you for using <span className={'text-success'}>GreenPay</span></h3>
+        <h3>Thank you for using <Link href={'/'} className={'text-decoration-none text-success'}>GreenPay</Link></h3>
         <br/>
         {loading && <p className={'d-flex align-items-center justify-content-center'}>
           Verifying transaction <span className={'ms-4 spinner-border'}></span>

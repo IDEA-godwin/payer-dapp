@@ -104,23 +104,22 @@ export default function Home() {
         {/*// <!--Featured in end-->*/}
 
         {/*// <!--Get block card start-->*/}
-        <section className="my-xl-4 py-4">
-          <div className="container" data-cue="fadeIn">
+        <section>
+          <div className="container mb-3" data-cue="fadeIn">
             <div className="row">
-              <div className="col-lg-5 col-md-12" data-cue="fadeIn">
-                <div className="mb-xl-7 mb-5">
-                  <h2 className="mb-3">
-                    Get Started in <br />
-                    <span className="text-primary">3 simple steps</span>
+              <div data-cue="fadeIn">
+                <div className="mb-xl-4 mb-3">
+                  <h2 className="mb-1">
+                    Get Started in <span className="text-primary">3 simple steps</span>
                   </h2>
                   <p className="mb-0">All payment here processed on the Behalf of TechandSun_NG</p>
                 </div>
               </div>
             </div>
             <div className="table-responsive-xl">
-              <div className="row flex-nowrap pb-4 pb-lg-0 me-5 me-lg-0">
+              <div className="row flex-nowrap">
                 <div className="col-lg-4 col-md-6 col-12" data-cue="slideInLeft">
-                  <div className="p-xl-5">
+                  <div>
                     <div className="d-flex align-items-center justify-content-between mb-5">
                       <div
                         className="icon-xl icon-shape rounded-circle bg-primary border border-primary-subtle border-4 text-white-stable fw-semibold fs-3">1
@@ -138,14 +137,14 @@ export default function Home() {
                       </span>
                     </div>
                     <h3 className="h4">Fill The Below Form</h3>
-                    <p className="mb-0">Please fill in the amount of flat (Naira) you are paying</p>
+                    <p className="mb-0">Please fill in the amount of fiat(Naira) you are paying</p>
                   </div>
                 </div>
                 <div className="col-lg-4 col-md-6 col-12" data-cue="slideInLeft">
-                  <div className="p-xl-5">
+                  <div>
                     <div className="d-flex align-items-center justify-content-between mb-5">
-                      <div
-                        className="icon-xl icon-shape rounded-circle bg-primary border border-primary-subtle border-4 text-white-stable fw-semibold fs-3">2
+                      <div className="icon-xl icon-shape rounded-circle bg-primary border border-primary-subtle border-4 text-white-stable fw-semibold fs-3">
+                        2
                       </div>
                       <span>
                         <svg
@@ -158,14 +157,13 @@ export default function Home() {
                         </svg>
                       </span>
                     </div>
-
                     <h3 className="h4">Complete Your Payment on Paystack</h3>
                     <p className="mb-0">You will be redirected to paystack to complete your payment, please your
                       payment through any of the available payment options on the gateway</p>
                   </div>
                 </div>
                 <div className="col-lg-4 col-md-6 col-12" data-cue="slideInLeft">
-                  <div className="p-xl-5">
+                  <div>
                     <div className="d-flex align-items-center justify-content-between mb-5">
                       <div
                         className="icon-xl icon-shape rounded-circle bg-primary border border-primary-subtle border-4 text-white-stable fw-semibold fs-3">3
@@ -180,28 +178,25 @@ export default function Home() {
                         </svg>
                       </span>
                     </div>
-
                     <h3 className="h4">Show Your Paystack receipt</h3>
-                    <p className="mb-0">Show the TAS station operator your receipt and Hand over your Device for
-                      charging, that's all</p>
+                    <p className="mb-0">
+                      Show the TAS station operator your receipt and Hand over your Device for
+                      charging, that's all
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
             <div className="row">
               <div className="col-lg-12" data-cue="zoomIn">
-                <div className="text-center my-5" id="starter">
+                <div className="text-center mt-4" id="starter">
                   <a href="#starter" className="btn btn-outline-primary">Let's Go!</a>
                 </div>
               </div>
             </div>
           </div>
         </section>
-        {/*// <!--Get block card end-->*/}
-
         <PaymentForm />
-
-        {/*// <!--Call to action start-->*/}
         <section>
           <div
             style={{
@@ -210,21 +205,21 @@ export default function Home() {
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover"
             }}
-            className="py-7 bg-primary-dark">
+            className="my-3 bg-primary-dark">
             <div className="container my-lg-7" data-cue="zoomIn">
-              <div className="row">
-                <div className="col-lg-8 offset-lg-2">
-                  <div className="text-center mb-5">
+              <div className="row justify-content-center">
+                <div className="col">
+                  <div className="text-center">
                     <h2 className="text-white-stable mb-3">Learn More About US!</h2>
-                    <p className="mb-0 text-white-50">
+                    <p className="mb-0 text-50">
                       Our Goal at TechandSun_NG and Greenpayer is to Make electricity from the sun accessible on
-                      demand one step at a time!
+                      demand <br /> one step at a time!
                     </p>
                   </div>
                 </div>
                 <div className="col-lg-12">
                   <div className="text-center">
-                    <a href="https://x.com/techandsun_ng" className="btn btn-primary">Ask Us Anything!</a>
+                    <a href="https://x.com/techandsun_ng" target={'_blank'} className="btn btn-primary my-3">Ask Us Anything!</a>
                   </div>
                 </div>
               </div>
