@@ -2,6 +2,7 @@ import {useForm} from "react-hook-form";
 
 import {PaymentFormData} from "~/types";
 import {initializeTransaction} from "~/app/actions";
+import Link from "next/link";
 
 
 export default function PaymentForm() {
@@ -93,6 +94,7 @@ export default function PaymentForm() {
                       <div className="d-grid">
                         <button className="btn btn-primary rounded-pill" type="submit">Proceed</button>
                       </div>
+                      <p>You can verify past payment <Link href={'/verify-payment'} className={'text-decoration-none'}>here</Link></p>
                     </form>
                   </div>
                 </div>
