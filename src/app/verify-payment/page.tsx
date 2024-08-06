@@ -56,11 +56,11 @@ export default function Page() {
     const acct = getAccount();
     if (!acct) return;
 
-    // approveSpend(acct.address, amount).then(async () => {
-    //   await pay(acct.address, data.metadata.meter_id, amount);
-    //   setSuccess(true);
-    //   setLoading(false);
-    // }, err => alert("could not approve transaction, contact developer for aid"));
+    approveSpend(acct.address, amount).then(async () => {
+      await pay(acct.address, data.metadata.meter_id, amount);
+      setSuccess(true);
+      setLoading(false);
+    }, err => alert("could not approve transaction, contact developer for aid"));
   }
 
   const handleSubmit = async (event: any) => {
