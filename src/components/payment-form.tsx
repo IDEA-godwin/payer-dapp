@@ -66,7 +66,7 @@ export default function PaymentForm() {
                         <select
                           {...register('metadata.meter_id', {required: true})}
                           className="form-select" id="companyPhoneInput" required>
-                          <option value={1}>Tech and Sun</option>
+                          <option value={6}>Tech and Sun</option>
                         </select>
                         <div className="invalid-feedback">Specify the Meter to be credited.</div>
                       </div>
