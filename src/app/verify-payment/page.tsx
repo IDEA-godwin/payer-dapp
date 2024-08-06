@@ -11,8 +11,8 @@ import Link from "next/link";
 
 
 export default function Page() {
-  const [hasTrxref, setHasTrxref] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [hasTrxref, setHasTrxref] = useState(false);
   const [success, setSuccess] = useState(false);
   const [amount, setAmount] = useState(0);
 
@@ -25,22 +25,33 @@ export default function Page() {
   useEffect(() => {
     if (params.has('trxref'))
       setHasTrxref(true);
-    else return;
+    else {
+      setLoading(false);
+      return;
+    }
     const ref = params.get('trxref');
-    if (ref) verify(ref).then(); else setLoading(false);
+    if (ref) verify(ref, true).then(); else setLoading(false);
   }, []);
 
-  const verify = async (reference: string) => {
+  const verify = async (reference: string, sendTrx: boolean) => {
     console.log('verifying paystack transaction with reference: ', reference);
     const res = await verifyPayment(reference);
     const data = res ? res.data : null;
+
     if (!data || data.status !== 'success') {
       console.log('paystack verification failed')
       setLoading(false);
       return;
     }
     console.log('paystack verification successful')
+
     setAmount(data.amount / 100);
+    if (!sendTrx) {
+      setSuccess(true);
+      setLoading(false);
+      return;
+    }
+
     const amount = (data.amount / 100) / convert_rate;
     const acct = getAccount();
     if (!acct) return;
@@ -60,7 +71,8 @@ export default function Page() {
       return;
     }
     setHasTrxref(true);
-    await verify(ref);
+    setLoading(true);
+    await verify(ref, false);
   }
 
   const tryAgain = () => {
@@ -80,7 +92,7 @@ export default function Page() {
           <a role={'button'} className={'text-decoration-none'} onClick={tryAgain}> Try again</a>
         </p>}
         {!loading && success && <p>
-          Transaction successful! Meter has been credited ₦{amount} worth of unit
+          Transaction was successful! Meter credited ₦{amount} worth of unit
         </p>}
       </div>
     </>
@@ -89,17 +101,21 @@ export default function Page() {
   const whenTrxrefFalse = () => {
     return (
       <section>
-        <h4>Enter Transaction code to verify payment</h4> <br />
-        <form onSubmit={handleSubmit} className={'d-flex justify-content-between'}>
-          <input className={'form-control w-75'} placeholder={'Transaction code'} />
-          <input className={'btn btn-secondary'} type={'submit'}/>
-        </form>
+        {loading && <span className={'spinner-grow'}></span>}
+        {!loading && <>
+          <h4>Enter Transaction code to verify payment</h4> <br/>
+          <form onSubmit={handleSubmit} className={'d-flex justify-content-between'}>
+            <input className={'form-control w-75'} placeholder={'Transaction code'}/>
+            <input className={'btn btn-secondary'} type={'submit'}/>
+          </form>
+        </>}
       </section>
     )
   }
 
   return (
-    <section className={'position-absolute top-0 left-0 right-0 bottom-0 w-100 d-flex align-items-center justify-content-center'}>
+    <section
+      className={'position-absolute top-0 left-0 right-0 bottom-0 w-100 d-flex align-items-center justify-content-center'}>
       {hasTrxref && whenTrxref()}
       {!hasTrxref && (whenTrxrefFalse())}
     </section>

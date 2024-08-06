@@ -47,7 +47,8 @@ export default function PaymentForm() {
                         <label htmlFor="companyPhoneInput" className="form-label">
                           Customer Name<span className="text-danger">*</span>
                         </label>
-                        <input {...register('metadata.full_name', {required: true})} className="form-control" id="companyPhoneInput" required/>
+                        <input {...register('metadata.full_name', {required: true})} className="form-control"
+                               id="companyPhoneInput" required/>
                         <div className="invalid-feedback">Please enter the customer name.</div>
                       </div>
                       <div className="col-md-12">
@@ -59,21 +60,25 @@ export default function PaymentForm() {
                       </div>
                       <div className="col-md-12">
                         <label className="form-label">
-                          Meter Id<span className="text-danger">*</span>
+                          Service Center<span className="text-danger">*</span>
                         </label>
-                        <input {...register('metadata.meter_id', {required: true})} className="form-control"
-                               id="companyPhoneInput" required/>
+                        <select
+                          {...register('metadata.meter_id', {required: true})}
+                          className="form-select" id="companyPhoneInput" required>
+                          <option value={1}>Tech and Sun</option>
+                        </select>
                         <div className="invalid-feedback">Specify the Meter to be credited.</div>
                       </div>
                       <div className="col-md-12">
-                        <label htmlFor="companyPhoneInput"
-                               className="form-label d-flex justify-content-between align-items-center">
-                            <span>
-                              Amount<span className="text-danger">*</span>
-                            </span>
+                        <label htmlFor="companyPhoneInput" className="form-label d-flex justify-content-between align-items-center">
+                          <span>Amount<span className="text-danger">*</span></span>
                           <sub className='fw-lighter'>₦1600 ≈ $1</sub>
                         </label>
-                        <input {...register('amount', {required: true})} className="form-control" required/>
+                        <select {...register('amount', {required: true})} className="form-select" required>
+                          <option value={250}>250</option>
+                          <option value={500}>500</option>
+                          <option value={1000}>1000</option>
+                        </select>
                         <div className="invalid-feedback">Please enter the Amount due.</div>
                       </div>
                       <div className="col-12">
