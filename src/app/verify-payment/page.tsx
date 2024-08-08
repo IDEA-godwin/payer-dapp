@@ -1,6 +1,6 @@
 'use client'
 
-import {useEffect, useState} from "react";
+import {Suspense, useEffect, useState} from "react";
 import {useSearchParams} from "next/navigation";
 import {verifyPayment} from "~/app/actions";
 import {
@@ -9,8 +9,7 @@ import {
 } from "~/helper/contract";
 import Link from "next/link";
 
-
-export default function Page() {
+function VerifyPayment() {
   const [loading, setLoading] = useState(true);
   const [hasTrxref, setHasTrxref] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -131,5 +130,13 @@ export default function Page() {
         {!hasTrxref && (whenTrxrefFalse())}
       </div>
     </section>
+  )
+}
+
+export default function Page() {
+  return (
+    <Suspense>
+      <VerifyPayment />
+    </Suspense>
   )
 }
