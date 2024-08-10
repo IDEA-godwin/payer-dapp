@@ -1,3 +1,5 @@
+'use server'
+
 import {Web3} from "web3";
 import relayer_abi from "./relayer-abi.json";
 import dai_abi from "./dai-abi.json";
@@ -6,13 +8,13 @@ import {BigNumber} from "@ethersproject/bignumber";
 
 const relayer_contract_address = process.env.NEXT_PUBLIC_RELAYER_CONTRACT_ADDRESS;
 const dai_contract_address = process.env.NEXT_PUBLIC_DAI_CONTRACT_ADDRESS;
-const key = process.env.NEXT_PUBLIC_ACCOUNT_KEY;
+const key = process.env.ACCOUNT_KEY;
 
 
 const web3 = new Web3("https://arb1.arbitrum.io/rpc");
 const connext_base = SdkBase.create({
   network: 'mainnet',
-  signerAddress: process.env.NEXT_PUBLIC_ACCOUNT_ADDRESS,
+  signerAddress: process.env.ACCOUNT_ADDRESS,
   chains: {
     42161: {
       providers: ['https://arb1.arbitrum.io/rpc'],
@@ -23,21 +25,21 @@ const connext_base = SdkBase.create({
   }
 });
 
-export const getAccount = () => {
+export const getAccount = async () => {
   if (!key) return;
-  if (web3.eth.accounts.wallet.length > 0) return web3.eth.accounts.wallet.get(0);
+  if (web3.eth.accounts.wallet.length > 0) return web3.eth.accounts.wallet.get(0)?.address;
 
-  return web3.eth.accounts.wallet.add(key)[0];
+  return web3.eth.accounts.wallet.add(key)[0].address;
 }
 
-export const nextValidNonce = (acct: string) => {
+export const nextValidNonce = async (acct: string) => {
 
 }
 
 export const getWalletBalance = async () => {
-  const acct = getAccount();
+  const acct = await getAccount();
   if (!acct) return;
-  console.log(await web3.eth.getBalance(acct?.address));
+  console.log(await web3.eth.getBalance(acct));
 }
 
 export const getDaiWalletBalance = async (acct: string) => {
