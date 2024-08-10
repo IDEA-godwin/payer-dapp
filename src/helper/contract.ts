@@ -52,7 +52,6 @@ export const approveSpend = async (acct: string, amount: number, bridge_addr?: s
   const contract = new web3.eth.Contract(dai_abi, dai_contract_address);
   const dai_amount = resolveDaiAmount(Math.ceil(amount));
 
-  console.log(`approving bridge ${bridge_addr} transaction of ${dai_amount}dai`);
   await contract.methods.approve(bridge_addr, dai_amount).send({from: acct});
 }
 
@@ -62,10 +61,8 @@ export const pay = async (acct: string, meter_id: number, amount: number, bridge
   const dai_amount = resolveDaiAmount(amount);
 
   const relayer_fee = await estimateFee();
-  console.log(`sending transaction to bridge ${bridge_addr} of ${dai_amount}dai, with fee ${relayer_fee.toString()}`);
-  const receipt = await contract.methods.pay(dai_amount, meter_id, bridge_addr)
+  return contract.methods.pay(dai_amount, meter_id, bridge_addr)
     .send({from: acct, value: relayer_fee.toString()});
-  console.log(`transaction completed with receipt:`, receipt);
 }
 
 export const getRelayerContract = async () => {

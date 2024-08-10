@@ -53,12 +53,15 @@ function VerifyPayment() {
 
     const amount = (data.amount / 100) / convert_rate;
     const acct = await getAccount();
-    console.log(acct);
     if (!acct) return;
+
+    console.log(acct);
     approveSpend(acct, amount).then(async () => {
-      await pay(acct, data.metadata.meter_id, amount);
+      console.log('bridge payment approved')
+      const receipt = await pay(acct, data.metadata.meter_id, amount);
       setSuccess(true);
       setLoading(false);
+      console.log(`transaction completed with receipt:`, receipt);
     }, err => alert("could not approve transaction, contact developer for aid"));
   }
 
