@@ -1,14 +1,8 @@
-'use client'
 
-import Image from "next/image";
 import Header from "~/components/header";
-import {Swiper, SwiperSlide} from "swiper/react";
-import {Autoplay, Navigation, Pagination} from "swiper/modules";
 
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
 import PaymentForm from "~/components/payment-form";
+import SponsorSwiper from "~/components/sponsor-swiper";
 
 export default function Home() {
   return (
@@ -57,47 +51,7 @@ export default function Home() {
         <div className="my-xl-9 my-5">
           <div className="container">
             <div className="row">
-              <div className="col-lg-10 offset-lg-1 col-12" data-cue="fadeIn">
-                <div className="text-center mb-4 mb-lg-7">
-                  <small className="text-uppercase fw-semibold ls-md">Powered By Our Partners</small>
-                </div>
-                <Swiper
-                  spaceBetween={100} slidesPerView={3} centeredSlides={true}
-                  autoplay={{delay: 2000, disableOnInteraction: true}} className={'swiper container'}
-                  modules={[Autoplay, Pagination, Navigation]} centeredSlidesBounds={true}
-                >
-                  <SwiperSlide>
-                    <figure className={'d-flex justify-content-center align-items-center'}>
-                      <Image src="/images/logo/taslogo_inverted-removebg-preview.png" width={47} height={47} className="logoguide" alt="logo"/>
-                    </figure>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <figure className={'d-flex justify-content-center align-items-center'}>
-                      <Image src="/images/logo/dex.png" className="logoguide" alt="logo" width={60} height={60}/>
-                    </figure>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <figure className={'d-flex justify-content-center align-items-center'}>
-                      <Image src="/images/logo/m3tering protocol.png" width={47} height={47} className="logoguide" alt="logo"/>
-                    </figure>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <figure className={'d-flex justify-content-center align-items-center'}>
-                      <Image src="/images/logo/Arbitrum.png" className="logoguide" alt="logo" width={47} height={47} />
-                    </figure>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <figure className={'d-flex justify-content-center align-items-center'}>
-                      <Image src="/images/logo/greenpill.png" className="logoguide" alt="logo" width={47} height={47} />
-                    </figure>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <figure className={'d-flex justify-content-center align-items-center'}>
-                      <Image src="/images/logo/Switch Electric PNG croped.png.webp" className="logoguide " width={47} height={47} alt="logo" />
-                    </figure>
-                  </SwiperSlide>
-                </Swiper>
-              </div>
+              <SponsorSwiper />
             </div>
           </div>
         </div>

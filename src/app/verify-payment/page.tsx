@@ -52,11 +52,11 @@ function VerifyPayment() {
     }
 
     const amount = (data.amount / 100) / convert_rate;
-    const acct = getAccount();
+    const acct = await getAccount();
+    console.log(acct);
     if (!acct) return;
-
-    approveSpend(acct.address, amount).then(async () => {
-      await pay(acct.address, data.metadata.meter_id, amount);
+    approveSpend(acct, amount).then(async () => {
+      await pay(acct, data.metadata.meter_id, amount);
       setSuccess(true);
       setLoading(false);
     }, err => alert("could not approve transaction, contact developer for aid"));

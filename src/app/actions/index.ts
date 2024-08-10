@@ -4,8 +4,8 @@ import {PaymentFormData} from "~/types";
 import {redirect, RedirectType} from "next/navigation";
 
 
+const paystack_api_secret = process.env.PAYSTACK_SECRET_KEY;
 const app_base_url = process.env.NEXT_PUBLIC_APP_BASEURL;
-const paystack_api_secret = process.env.NEXT_PUBLIC_PAYSTACK_SECRET_KEY;
 const paystack_base_url = process.env.NEXT_PUBLIC_PAYSTACK_BASEURL;
 
 export const initializeTransaction = async (data: PaymentFormData) => {
