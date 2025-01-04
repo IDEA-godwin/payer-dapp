@@ -6,7 +6,6 @@ import "./globals.css";
 import Script from "next/script";
 import Head from "next/head";
 import Link from "next/link";
-import Header from "~/components/header";
 
 const inter = Inter({subsets: ["latin"]});
 
@@ -34,7 +33,6 @@ export default function RootLayout({children}: Readonly<{ children: React.ReactN
       </Head>
       <body className={inter.className}>
         {children}
-
         <Script src={'/js/vendors/color-modes.js'}/>
         <Script src={'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js'}/>
       </body>

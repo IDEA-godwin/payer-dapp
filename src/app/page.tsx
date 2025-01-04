@@ -7,59 +7,10 @@ import SponsorSwiper from "~/components/sponsor-swiper";
 export default function Home() {
   return (
     <>
-      <Header/>
       <main>
-        {/*// <!--Hero start-->*/}
-        <section className="bg-primary-dark pt-9 right-slant-shape" data-cue="fadeIn">
-          <div className="container">
-            <div className="row align-items-center">
-              <div className="col-lg-5 col-12">
-                <div className="text-center text-lg-start mb-7 mb-lg-0" data-cues="slideInDown">
-                  <div className="mb-4">
-                    <h1 className="mb-5 display-5 text-white-stable">
-                      Energy Payments <br />
-                      <span className="text-pattern-line text-warning">at it's Finest</span>
-                    </h1>
-                    <p className="mb-0 text-white-stable lead">
-                      Payment Gateway for all TechandSun_NG stations on the M3tering Protocol.
-                    </p>
-                  </div>
-                  <div data-cues="slideInDown">
-                    <a href="#starter" className="btn btn-primary me-2">Get Started</a>
-                    <a href="#" className="btn btn-outline-warning">Contact Support</a>
-                  </div>
-                </div>
-              </div>
-              <div className="offset-lg-1 col-lg-6 col-12">
-                <div className="position-relative z-1 pt-lg-9" data-cue="slideInRight">
-                  <div className="position-relative">
-                    <img src="/images/logo/africanpaying.jpg" alt="video" className="img-fluid rounded-3"/>
-                    <a
-                      href="https://www.youtube.com/watch?v=QD8xBSOZuRM&t=20s"
-                      className="play-btn glightbox position-absolute top-50 start-50 translate-middle icon-shape icon-xl rounded-circle text-primary">
-                      <i className="bi bi-play-fill"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        {/*// <!--Hero start-->*/}
-
-        {/*// <!--Featured in start-->*/}
-        <div className="my-xl-9 my-5">
-          <div className="container">
-            <div className="row">
-              <SponsorSwiper />
-            </div>
-          </div>
-        </div>
-        {/*// <!--Featured in end-->*/}
-
         {/*// <!--Get block card start-->*/}
-        <section>
-          <div className="container mb-3" data-cue="fadeIn">
+        {/* <section>
+          <div className="container my-3" data-cue="fadeIn">
             <div className="row">
               <div data-cue="fadeIn">
                 <div className="mb-xl-4 mb-3">
@@ -149,24 +100,21 @@ export default function Home() {
               </div>
             </div>
           </div>
+        </section> */}
+
+        <section className="bg-light py-lg-4 py-4">
+          <PaymentForm />
         </section>
-        <PaymentForm />
+
         <section>
-          <div
-            style={{
-              backgroundImage: "url(/images/pattern/cta-pattern.png)",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover"
-            }}
-            className="my-3 bg-primary-dark">
+          <div className="my-3 bg-primary-dark">
             <div className="container my-lg-7" data-cue="zoomIn">
               <div className="row justify-content-center">
                 <div className="col">
                   <div className="text-center">
                     <h2 className="text-white-stable mb-3">Learn More About US!</h2>
                     <p className="mb-0 text-50">
-                      Our Goal at TechandSun_NG and Greenpayer is to Make electricity from the sun accessible on
+                      Our Goal at M3tering is to Make electricity from the sun accessible on
                       demand <br /> one step at a time!
                     </p>
                   </div>
