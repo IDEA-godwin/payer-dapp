@@ -10,7 +10,6 @@ import {
 import { WagmiProvider, createConfig, http } from 'wagmi';
 import { celo, celoAlfajores } from 'wagmi/chains';
 
-import Layout from '../components/Layout';
 import { injectedWallet } from '@rainbow-me/rainbowkit/wallets';
 
 const connectors = connectorsForWallets(
@@ -21,7 +20,7 @@ const connectors = connectorsForWallets(
     },
   ],
   {
-    appName: 'Celo Composer',
+    appName: 'M3tering Payer',
     projectId: process.env.WC_PROJECT_ID ?? '044601f65212332475a09bc14ceb3c34',
   }
 );
@@ -42,7 +41,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider>
-          <Layout>{children}</Layout>
+          {children}
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
