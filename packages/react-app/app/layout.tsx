@@ -11,9 +11,9 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body>
+      <body className=''>
         <AppProvider>
-          <Layout loading={true}>{children}</Layout>
+          <Layout loading={false}>{children}</Layout>
         </AppProvider>
       </body>
     </html>

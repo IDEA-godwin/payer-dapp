@@ -9,9 +9,9 @@ const Layout: FC<Props> = ({ children, loading }) => {
   return (
     <>
       { loading && <Loading />}
-      <div className="bg-gypsum overflow-hidden flex flex-col min-h-screen">
+      <div className="bg-[#332807] max-w-sm flex justify-center flex-col min-h-screen">
         {/* <Header /> */}
-        <div className="py-16 max-w-7xl mx-auto space-y-8 sm:px-6 lg:px-8">
+        <div className="mx-auto space-y-8 sm:px-6 lg:px-8">
           {children}
         </div>
         {/* <Footer /> */}

@@ -6,10 +6,10 @@
   "author": "m3tering",
   "license": "MIT",
   "scripts": {
-    "react-app:dev": "pnpm --filter react-app dev",
-    "react-app:build": "pnpm --filter react-app build",
-    "react-app:start": "pnpm --filter react-app start",
-    "react-app:lint": "pnpm --filter react-app lint"
+    "dapp:dev": "pnpm --filter react-app dev",
+    "dapp:build": "pnpm --filter react-app build",
+    "dapp:start": "pnpm --filter react-app start",
+    "dapp:lint": "pnpm --filter react-app lint"
   },
   "repository": {
     "type": "git",
