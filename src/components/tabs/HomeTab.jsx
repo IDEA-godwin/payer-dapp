@@ -153,7 +153,7 @@ const HomeTab = ({ toggleRechargeMeter }) => {
 
       setVisibleHistory(fetchedRechargeHistory);
       setIsLoading(false); // Set loading to false after data is fetched
-    }, 2000); // Simulate 2 seconds delay for the API call
+    }, 1000); // Simulate 1 second delay for the API call
   }, []);
 
   const fetchedRechargeHistory = showAll
@@ -171,7 +171,7 @@ const HomeTab = ({ toggleRechargeMeter }) => {
         { title: "Energy Balance", amount: "75.00 kWh" },
       ]);
       setLoading(false);
-    }, 2000); // 2 seconds delay
+    }, 1000); // 1 second delay
   }, []);
 
   return (
