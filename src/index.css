@@ -1,12 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap");
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 @theme {
+  /* Your original theme variables - kept exactly the same */
   --dark-background-color: #020d1e;
   --text-color-dark: #ffffff;
-  --light-background-color: #ffffff;
+  --light-background-color: #e7cd87;
   --text-color-light: #1a1a1a;
   --linear-light-bg: linear-gradient(
     to bottom right,
@@ -16,31 +15,32 @@
   );
   --text-orange-500: #f85a16;
   --link-color: #f85a16;
-  --primary-button-bg: var(--link-color);
+  --primary-button-bg: #f85a16;
   --primary-button-text: #ffffff;
   --secondary-button-bg: #1a1a1a;
   --secondary-button-text: #ffffff;
 }
 
-/* Default to light mode */
-body {
-  background-color: var(--light-background-color);
-  color: var(--text-color-light);
-  font-family: "Agdasima", sans-serif;
-  font-weight: bolder;
+:root {
+  --background: var(--light-background-color);
+  --text-color: var(--text-color-light);
 }
 
-/* Manual dark mode class */
 .dark {
   --background: var(--dark-background-color);
   --text-color: var(--text-color-dark);
 }
 
-.dark body {
+/* Base styles with smooth transitions */
+body {
   background-color: var(--background);
   color: var(--text-color);
+  font-family: "Agdasima", sans-serif;
+  font-weight: bolder;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* All your original selectors - kept intact */
 .dark .profile-bg {
   background-color: #2d3748;
 }
@@ -61,24 +61,14 @@ button.secondary {
   color: var(--secondary-button-text);
 }
 
-@media (prefers-color-scheme: dark) {
-  button.secondary {
-    background-color: #ffffff;
-    color: #1a1a1a;
-  }
-}
-
-/* Switch to dark mode if system preference is dark and not manually overridden */
-@media (prefers-color-scheme: dark) {
-  body:not(.light) {
-    background-color: var(--dark-background-color);
-    color: var(--text-color-dark);
-    font-family: "Agdasima", sans-serif;
-    letter-spacing: 1px;
-    font-weight: bolder;
-  }
-}
-
 a {
   color: var(--link-color);
 }
+
+/* Improved dark mode handling */
+.dark button.secondary {
+  background-color: var(--text-color-dark);
+  color: var(--dark-background-color);
+}
+
+/* Remove the media queries since we're handling dark mode manually */

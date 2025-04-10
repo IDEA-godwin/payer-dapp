@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 const GlobalContext = createContext();
 
@@ -12,12 +12,33 @@ export const GlobalProvider = ({ children }) => {
     { id: 4, name: "Product 4", image: "/shop/product4.png" },
   ];
 
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) return savedTheme === "dark";
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  });
+
+  // Handle Dark Mode Toggle
+  const handleDarkMode = () => {
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
+    document.documentElement.classList.toggle("dark", newMode);
+    localStorage.setItem("theme", newMode ? "dark" : "light");
+  };
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", isDarkMode);
+  }, []);
+
   return (
     <GlobalContext.Provider
       value={{
         meterId,
         avatar,
         products,
+        isDarkMode,
+        setIsDarkMode,
+        handleDarkMode,
       }}
     >
       {children}
