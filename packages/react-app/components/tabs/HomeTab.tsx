@@ -228,12 +228,12 @@ const HomeTab = ({ toggleRechargeMeter }: { toggleRechargeMeter: any }) => {
 
             {/* Bottom section */}
             <div className="flex justify-between items-center mt-5">
-              <div>
+              {/* <div>
                 <p className="font-light">{balances[1].title}</p>
                 <p className="text-xl">
                   {isHidden ? "****" : balances[1].amount}
                 </p>
-              </div>
+              </div> */}
               <div>
                 <p className="font-light">{balances[2].title}</p>
                 <p className="text-xl">
