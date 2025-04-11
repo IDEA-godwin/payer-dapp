@@ -5,8 +5,6 @@ import { Loader2, Info } from "lucide-react";
 import { useGlobalContext } from "../../contexts/GlobalContext";
 import { useRouter } from "next/navigation";
 
-const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-
 export default function Page() {
 
   const [inputValue, setInputValue] = useState("");
@@ -38,14 +36,22 @@ export default function Page() {
       });
   };
 
+  //   style = {{
+  //     backgroundColor:
+  //     error && !isDark ? "#E8CE88" : "var(--background-color)",
+  //       color: "var(--text-color)",
+  //       }
+  // }
+  //   style = {{
+  //     backgroundColor: isDark ? "#373737" : "#CACACA",
+  //       border: error ? "#DB8F87 solid 1px" : "none",
+  //         color: "var(--text-color)",
+  //           }
+  // }
+
   return (
     <div
       className="min-h-screen flex flex-col items-center justify-between px-6 py-12"
-      style={{
-        backgroundColor:
-          error && !isDark ? "#E8CE88" : "var(--background-color)",
-        color: "var(--text-color)",
-      }}
     >
       <div className="text-left w-full">
         <h2 className="text-xl font-bold">
@@ -66,11 +72,6 @@ export default function Page() {
             setError("");
           }}
           className="w-full p-2 mt-4 border-none outline-none text-center rounded-xl"
-          style={{
-            backgroundColor: isDark ? "#373737" : "#CACACA",
-            border: error ? "#DB8F87 solid 1px" : "none",
-            color: "var(--text-color)",
-          }}
         />
         {error && (
           <p className="text-red-500 text-sm mt-1">
