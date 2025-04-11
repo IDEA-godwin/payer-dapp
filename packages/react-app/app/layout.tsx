@@ -2,6 +2,7 @@ import '@/styles/globals.css';
 
 import { AppProvider } from '@/providers/AppProvider';
 import Layout from '@/components/Layout';
+import { GlobalProvider } from '@/contexts/GlobalContext';
 
 export default function RootLayout({
   children,
@@ -13,7 +14,9 @@ export default function RootLayout({
     <html lang="en">
       <body className=''>
         <AppProvider>
-          <Layout loading={false}>{children}</Layout>
+          <GlobalProvider>
+            <Layout loading={false}>{children}</Layout>
+          </GlobalProvider>
         </AppProvider>
       </body>
     </html>
