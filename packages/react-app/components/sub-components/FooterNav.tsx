@@ -1,10 +1,13 @@
 import { Home, ShoppingCart, Search, User } from "lucide-react";
 
-const FooterNav = ({ activeTab, setActiveTab }: any) => {
+const FooterNav = ({ width, activeTab, setActiveTab }: any) => {
   const isActive = (tab: any) => tab === activeTab;
 
   return (
-    <footer className="fixed bottom-0 left-0 bg-[var(--dark-background-color)] w-full py-4 flex justify-around items-center z-50 text-[#f5f5f5] px-4">
+    <footer
+      className="fixed bottom-0 left-0 bg-[#221F1F] pt-4 flex justify-around items-center z-50 text-[#f5f5f5] px-4"
+      style={{ width }}
+    >
       {[
         { icon: <Home />, label: "Home", key: "home" },
         { icon: <ShoppingCart />, label: "Shop", key: "shop" },
@@ -14,7 +17,7 @@ const FooterNav = ({ activeTab, setActiveTab }: any) => {
         <div
           key={key}
           onClick={() => setActiveTab(key)}
-          className={`flex items-center justify-center flex-col font-light cursor-pointer ${isActive(key) ? "text-[var(--link-color)]" : ""
+          className={`flex items-center justify-center flex-col font-light cursor-pointer ${isActive(key) ? "text-[#F85A16] border-b-2 border-[#F85A16]" : ""
             }`}
         >
           {icon}

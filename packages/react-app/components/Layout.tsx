@@ -9,10 +9,8 @@ const Layout: FC<Props> = ({ children, loading }) => {
   return (
     <>
       {loading && <Loading />}
-      <div className=" text-(--text-color) bg-(--linear-light-bg) dark:bg(--background-color)">
-        <div className="mx-auto space-y-8 sm:px-6 lg:px-8">
-          {children}
-        </div>
+      <div className="max-w-sm bg-primary">
+        {children}
       </div>
     </>
   );

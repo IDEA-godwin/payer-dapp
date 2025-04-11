@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import FooterNav from "@/components/sub-components/FooterNav";
 import HeaderBar from "@/components/sub-components/HeaderBar";
@@ -14,6 +14,10 @@ import RechargeMeter from "@/components/RechargeMeter";
 import { useGlobalContext } from "@/contexts/GlobalContext";
 
 export default function Page() {
+
+  const parentRef = useRef<HTMLDivElement | null>(null)
+  const [width, setWidth] = useState(0);
+
   const [activeTab, setActiveTab] = useState("home");
   const [showRechargeMeter, setShowRechargeMeter] = useState(false);
 
@@ -23,6 +27,21 @@ export default function Page() {
   const toggleRechargeMeter = () => {
     setShowRechargeMeter(!showRechargeMeter);
   };
+
+  useEffect(() => {
+    const updateWidth = () => {
+      if (parentRef.current) {
+        console.log(parentRef.current.classList)
+        setWidth(parentRef.current.offsetWidth);
+      }
+    };
+
+    updateWidth();
+    window.addEventListener('resize', updateWidth);
+    return () => window.removeEventListener('resize', updateWidth);
+  }, []);
+
+
 
   const renderActiveTab = () => {
     switch (activeTab) {
@@ -41,10 +60,10 @@ export default function Page() {
     return <RechargeMeter toggleRechargeMeter={toggleRechargeMeter} />;
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-between px-6 py-5">
-      {activeTab === "home" && <HeaderBar meterId={meterId} avatar={avatar} />}
-      <main className="flex-1 p-4 w-full mt-20 mb-24">{renderActiveTab()}</main>
-      <FooterNav activeTab={activeTab} setActiveTab={setActiveTab} />
+    <div ref={parentRef} className="w-full flex flex-col items-center justify-between">
+      {(activeTab === "home" || activeTab === "profile") && <HeaderBar meterId={meterId} avatar={avatar} />}
+      <main className="flex-1 p-4 w-full mb-24 z-1">{renderActiveTab()}</main>
+      <FooterNav width={width} activeTab={activeTab} setActiveTab={setActiveTab} />
     </div>
   );
 };

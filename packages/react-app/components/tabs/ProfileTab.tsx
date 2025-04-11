@@ -11,7 +11,7 @@ import { useState } from "react";
 
 export default function ProfileTab() {
   const { meterId, avatar } = useGlobalContext();
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
   // Handle Dark Mode Toggle
   const handleDarkMode = () => {
@@ -26,8 +26,8 @@ export default function ProfileTab() {
 
   return (
     <div className="h-[70vh] text-white">
-      <div className="flex flex-col items-center -mt-24">
-        <div className="w-40 h-auto rounded-full p-1 overflow-hidden">
+      <div className="flex mt-10 flex-col items-center">
+        <div className="w-40 rounded-full p-1">
           <img
             src={avatar}
             alt="Avatar"
@@ -38,29 +38,29 @@ export default function ProfileTab() {
       </div>
 
       {/* Options */}
-      <div className="mt-14 px-4 py-6 rounded-2xl space-y-5 bg-[#425183] profile-bg shadow-[0_0_60px_10px_rgba(66,81,131,0.99)]">
+      <div className="mt-3 px-4 py-3 rounded-2xl space-y-5 bg-[#425183] profile-bg shadow-[0_0_60px_10px_rgba(66,81,131,0.99)]">
         <Option
           icon={<UserPenIcon size={18} />}
           label="Replace meter"
           onClick={() => handleOptionClick("replace")}
         />
         <Option
-          icon={isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
-          label={isDarkMode ? "Light mode" : "Dark mode"}
+          icon={!isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
+          label={!isDarkMode ? "Light mode" : "Dark mode"}
           trailing={
             <label className="inline-flex items-center cursor-pointer">
               <input
                 type="checkbox"
                 className="sr-only peer"
-                checked={isDarkMode}
+                checked={!isDarkMode}
                 onChange={handleDarkMode}
               />
               <div className="w-11 h-6 bg-white/30 rounded-full relative transition-colors duration-300 peer-checked:bg-[var(--link-color)]">
                 <span
-                  className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-all duration-300 text-orange-500 grid place-items-center ${isDarkMode ? "translate-x-5" : ""
+                  className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-all duration-300 text-orange-500 grid place-items-center ${!isDarkMode ? "translate-x-5" : ""
                     }`}
                 >
-                  {isDarkMode ? (
+                  {!isDarkMode ? (
                     <Sun size={18} className="text-black" />
                   ) : (
                     <Moon size={18} />

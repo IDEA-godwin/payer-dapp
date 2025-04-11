@@ -11,10 +11,7 @@ const HeaderBar = ({ meterId, avatar }: any) => {
   }, []);
 
   return (
-    <header
-      className={`flex justify-between px-5 py-1 bg-[var(--dark-background-color)] items-center w-full fixed right-0 top-0 z-50 transition-shadow duration-300 ease-in-out  text-[#f5f5f5] ${hasShadow ? "shadow-md shadow-[rgba(255,255,255,0.1)]" : ""
-        } `}
-    >
+    <header className={`flex justify-between items-center px-3 py-3 transition-shadow duration-300 ease-in-out  text-[#f5f5f5] w-full sticky top-0 ${hasShadow ? "shadow-md shadow-[rgba(255,255,255,0.1)] bg-[#221F1F]/80" : ""}`}>
       <div className="flex items-center space-x-2">
         <img src={avatar} className="w-10 h-auto" />
         <div className="text-left -space-y-1">

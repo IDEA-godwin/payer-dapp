@@ -51,7 +51,7 @@ export default function Page() {
 
   return (
     <div
-      className="min-h-screen flex flex-col items-center justify-between px-6 py-12"
+      className="min-h-screen flex flex-col items-center justify-between px-5 py-12"
     >
       <div className="text-left w-full">
         <h2 className="text-xl font-bold">
@@ -82,13 +82,13 @@ export default function Page() {
       </div>
       <div />
       <button
-        className={`font-semibold py-3 px-6 rounded-xl w-full max-w-xs shadow-md flex items-center justify-center`}
+        className="flex items-center justify-center bg-[#221F1F] text-white font-semibold py-3 px-6 rounded-xl w-full text-center shadow-md cursor-pointer"
         disabled={!inputValue}
         onClick={handleSubmit}
       >
         {isLoading ? (
           <>
-            <Loader2 className="animate-spin -ml-1 mr-2 h-4 w-4 text-[#f85a16]" />
+            <Loader2 className="animate-spin -ml-1 mr-2 h-4 w-4" />
             {"Link meter"}
           </>
         ) : ("Link meter")}

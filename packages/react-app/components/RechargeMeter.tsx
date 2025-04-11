@@ -1,17 +1,15 @@
-import { ChevronLeft, Wallet } from "lucide-react";
+import { ChevronLeft, Loader2, Wallet } from "lucide-react";
 import { useState } from "react";
 
 const RechargeMeter = ({ toggleRechargeMeter }: { toggleRechargeMeter: () => void }) => {
   const prices = [20, 50, 100, 200, 500, 1000];
   const [priceValue, setPriceValue] = useState(0);
-  const [modal, setModal] = useState(false);
 
-  const toggleModal = () => {
-    setModal(!modal);
-  };
+  const [isLoading, setLoading] = useState(false)
+
 
   return (
-    <div className="px-4">
+    <div className="min-h-screen px-5 py-2">
       {/* Back button */}
       <button
         onClick={toggleRechargeMeter}
@@ -21,16 +19,16 @@ const RechargeMeter = ({ toggleRechargeMeter }: { toggleRechargeMeter: () => voi
       </button>
 
       {/* Headers */}
-      <div className=" pt-2">
+      <div className=" mt-10 pt-5">
         <h1 className="text-2xl font-extrabold">
-          Recharge <span className="text-[var(--link-color)]">Meter</span>
+          Recharge <span className="text-[#f85a16]">M3ter</span>
         </h1>
         <h2 className="font-light">Top up your meter</h2>
         {/* Add your recharge options here */}
       </div>
 
       {/* Fixed Price */}
-      <section className="grid grid-cols-3 gap-4 mt-5">
+      <section className="grid grid-cols-3 gap-4 mt-5 text-white">
         {prices.map((price) => {
           return (
             <div
@@ -53,7 +51,7 @@ const RechargeMeter = ({ toggleRechargeMeter }: { toggleRechargeMeter: () => voi
       </section>
 
       {/* Input */}
-      <div className="mt-5 w-full flex items-center justify-between text-[var(--link-color)]">
+      <div className="mt-9 w-full flex items-center justify-between text-[var(--link-color)]">
         <span className="text-xl font-light">$</span>
         <input
           type="text"
@@ -64,6 +62,19 @@ const RechargeMeter = ({ toggleRechargeMeter }: { toggleRechargeMeter: () => voi
           className="p-2 text-[var(--link-color)] w-[95%] border-b outline-none border-gray-500"
         />
       </div>
+
+      <button
+        className="flex items-center justify-center mt-10 bg-[#221F1F] text-white font-semibold py-3 px-6 rounded-xl w-full text-center shadow-md cursor-pointer"
+        disabled={!priceValue}
+      // onClick={handleSubmit}
+      >
+        {isLoading ? (
+          <>
+            <Loader2 className="animate-spin -ml-1 mr-2 h-4 w-4" />
+            {"Pay"}
+          </>
+        ) : ("Pay")}
+      </button>
     </div>
   );
 };
