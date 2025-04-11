@@ -2,14 +2,13 @@ import { useState } from "react";
 import { Loader2, Info } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../context/GlobalContext";
-const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
 export function LinkMeterScreen({ connectScreen, setConnectScreen }) {
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const { meterId } = useGlobalContext();
+  const { meterId, isDarkMode } = useGlobalContext();
 
   const isButtonDisabled = connectScreen
     ? inputValue.length < 5 || inputValue.length > 10
@@ -46,7 +45,7 @@ export function LinkMeterScreen({ connectScreen, setConnectScreen }) {
       className="min-h-screen flex flex-col items-center justify-between px-6 py-12"
       style={{
         backgroundColor:
-          error && !isDark ? "#E8CE88" : "var(--background-color)",
+          error && !isDarkMode ? "#E8CE88" : "var(--background-color)",
         color: "var(--text-color)",
       }}
     >
@@ -75,7 +74,7 @@ export function LinkMeterScreen({ connectScreen, setConnectScreen }) {
               }}
               className="w-full p-2 mt-4 border-none outline-none text-center rounded-xl"
               style={{
-                backgroundColor: isDark ? "#373737" : "#CACACA",
+                backgroundColor: isDarkMode ? "#373737" : "#CACACA",
                 border: error ? "#DB8F87 solid 1px" : "none",
                 color: "var(--text-color)",
               }}

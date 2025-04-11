@@ -46,8 +46,8 @@ export default function ProfileTab() {
           onClick={() => handleOptionClick("replace")}
         />
         <Option
-          icon={isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
-          label={isDarkMode ? "Light mode" : "Dark mode"}
+          icon={isDarkMode ? <Moon size={18} /> : <Sun size={18} />}
+          label={"Dark mode"}
           trailing={
             <label className="inline-flex items-center cursor-pointer">
               <input
@@ -63,9 +63,9 @@ export default function ProfileTab() {
                   }`}
                 >
                   {isDarkMode ? (
-                    <Sun size={18} className="text-black" />
-                  ) : (
                     <Moon size={18} />
+                  ) : (
+                    <Sun size={18} className="text-black" />
                   )}
                 </span>
               </div>
