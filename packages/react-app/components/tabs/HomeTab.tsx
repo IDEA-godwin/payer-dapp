@@ -240,21 +240,22 @@ const HomeTab = ({ toggleRechargeMeter }: { toggleRechargeMeter: any }) => {
                   {isHidden ? "****" : balances[2].amount}
                 </p>
               </div>
+              <button
+                className="w-full py-6 cursor-pointer text-white bg-black border-[#123A77] border-[1px] rounded-xl flex flex-col items-center justify-between"
+                onClick={toggleRechargeMeter}
+              >
+                <img src="images/recharge.png" alt="recharge" />
+                <p>Recharge Meter</p>
+              </button>
             </div>
           </>
         )}
       </div>
 
       {/* Recharge Meter Button */}
-      <div className="w-full mt-10">
-        <button
-          className="w-full py-6 cursor-pointer text-white bg-black border-[#123A77] border-[1px] rounded-xl flex flex-col items-center justify-between"
-          onClick={toggleRechargeMeter}
-        >
-          <img src="images/recharge.png" alt="recharge" />
-          <p>Recharge Meter</p>
-        </button>
-      </div>
+      {/* <div className="w-full mt-10">
+
+      </div> */}
 
       {/* Recent Transactions */}
       <div className="w-full mt-6">
