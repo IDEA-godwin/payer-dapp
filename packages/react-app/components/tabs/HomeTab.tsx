@@ -257,7 +257,7 @@ const HomeTab = ({ toggleRechargeMeter }: { toggleRechargeMeter: any }) => {
       </div>
 
       {/* Recent Transactions */}
-      <div className="w-full mt-6 mb-12">
+      <div className="w-full mt-6">
         <div className="flex justify-between font-light items-center pb-3 mb-2 border-b-[1px]">
           <h2>Recent Transactions</h2>
           <p onClick={() => setShowAll(!showAll)} className="cursor-pointer">
