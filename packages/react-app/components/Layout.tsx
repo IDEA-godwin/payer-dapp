@@ -9,7 +9,7 @@ const Layout: FC<Props> = ({ children, loading }) => {
   return (
     <>
       {loading && <Loading />}
-      <div className="max-w-sm bg-primary">
+      <div className="bg-primary">
         {children}
       </div>
     </>
