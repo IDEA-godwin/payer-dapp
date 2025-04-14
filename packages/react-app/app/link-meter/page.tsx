@@ -84,7 +84,7 @@ export default function Page() {
         )}
 
         <div>
-          {`window ethereum is ${JSON.stringify(window.ethereum)}`}
+          {`window ethereum is ${window.ethereum}`}
         </div>
       </div>
       <div />
