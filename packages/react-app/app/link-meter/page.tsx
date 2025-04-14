@@ -16,7 +16,7 @@ export default function Page() {
 
   const navigate = useRouter()
 
-  const { isMinipay, eth } = useWeb3()
+  const { isMinipay } = useWeb3()
 
 
   const handleSubmit = () => {
@@ -84,10 +84,6 @@ export default function Page() {
             {error}
           </p>
         )}
-
-        <div>
-          {`window ethereum is ${stringify(eth)}`}
-        </div>
       </div>
       <div />
       <button
