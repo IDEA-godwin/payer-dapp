@@ -82,6 +82,10 @@ export default function Page() {
             {error}
           </p>
         )}
+
+        <div>
+          {`window ethereum is ${JSON.stringify(window.ethereum)}`}
+        </div>
       </div>
       <div />
       <button
