@@ -5,6 +5,7 @@ import { Loader2, Info } from "lucide-react";
 import { useGlobalContext } from "../../contexts/GlobalContext";
 import { useRouter } from "next/navigation";
 import { useWeb3 } from "@/contexts/useWeb3";
+import { stringify } from "flatted";
 
 export default function Page() {
 
@@ -84,7 +85,7 @@ export default function Page() {
         )}
 
         <div>
-          {`window ethereum is ${window.ethereum}`}
+          {`window ethereum is ${stringify(window.ethereum)})`}
         </div>
       </div>
       <div />

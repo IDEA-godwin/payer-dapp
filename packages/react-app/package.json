@@ -21,6 +21,7 @@
     "encoding": "^0.1.13",
     "eslint-config-next": "^15.0.2",
     "ethers": "^6.13.4",
+    "flatted": "^3.3.3",
     "lucide-react": "^0.454.0",
     "m3ters": "^1.0.6",
     "next": "^15.0.2",
