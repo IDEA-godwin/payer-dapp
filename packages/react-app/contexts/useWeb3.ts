@@ -24,7 +24,7 @@ export const useWeb3 = () => {
 
   const [address, setAddress] = useState<string | null>(null);
 
-  const isMinipay = typeof window !== "undefined" && window.ethereum.isMetaMask;
+  const isMinipay = typeof window !== "undefined" && window.ethereum.isMinipay;
 
   const getUserAddress = async () => {
     if (typeof window !== "undefined" && window.ethereum) {
