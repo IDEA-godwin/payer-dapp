@@ -21,7 +21,10 @@ const cUSDTokenAddress = "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1"; // Testne
 const MINIPAY_NFT_CONTRACT = "0xE8F4699baba6C86DA9729b1B0a1DA1Bd4136eFeF"; // Testnet
 
 export const useWeb3 = () => {
+
   const [address, setAddress] = useState<string | null>(null);
+
+  const isMinipay = typeof window !== "undefined" && window.ethereum?.minipay;
 
   const getUserAddress = async () => {
     if (typeof window !== "undefined" && window.ethereum) {
@@ -132,6 +135,7 @@ export const useWeb3 = () => {
 
   return {
     address,
+    isMinipay,
     getUserAddress,
     sendCUSD,
     mintMinipayNFT,

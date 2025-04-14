@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Loader2, Info } from "lucide-react";
 import { useGlobalContext } from "../../contexts/GlobalContext";
 import { useRouter } from "next/navigation";
+import { useWeb3 } from "@/contexts/useWeb3";
 
 export default function Page() {
 
@@ -13,6 +14,8 @@ export default function Page() {
   const { meterId } = useGlobalContext();
 
   const navigate = useRouter()
+
+  const { isMinipay } = useWeb3()
 
   const handleSubmit = () => {
     setIsLoading(true);
@@ -55,7 +58,7 @@ export default function Page() {
     >
       <div className="text-left w-full">
         <h2 className="text-xl font-bold">
-          Get <span style={{ color: "var(--link-color)" }}>started</span>
+          Get <span style={{ color: "var(--link-color)" }}>started</span> {isMinipay ? " Minipay User" : "User"}
         </h2>
         <p className="text-sm mt-2" style={{ color: "var(--text-color)" }}>
           {"Link your meter and start managing your energy usage"}
