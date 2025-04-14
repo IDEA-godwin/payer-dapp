@@ -26,6 +26,8 @@ export const useWeb3 = () => {
 
   const isMinipay = typeof window !== "undefined" && window.ethereum;
 
+  const eth = (typeof window !== 'undefined') ? window.ethereum : "damn it"
+
   const getUserAddress = async () => {
     if (typeof window !== "undefined" && window.ethereum) {
       let walletClient = createWalletClient({
@@ -134,6 +136,7 @@ export const useWeb3 = () => {
   };
 
   return {
+    eth,
     address,
     isMinipay,
     getUserAddress,

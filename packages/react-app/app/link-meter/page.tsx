@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Loader2, Info } from "lucide-react";
 import { useGlobalContext } from "../../contexts/GlobalContext";
 import { useRouter } from "next/navigation";
@@ -16,7 +16,8 @@ export default function Page() {
 
   const navigate = useRouter()
 
-  const { isMinipay } = useWeb3()
+  const { isMinipay, eth } = useWeb3()
+
 
   const handleSubmit = () => {
     setIsLoading(true);
@@ -85,7 +86,7 @@ export default function Page() {
         )}
 
         <div>
-          {`window ethereum is ${stringify(window.ethereum)})`}
+          {`window ethereum is ${stringify(eth)}`}
         </div>
       </div>
       <div />
