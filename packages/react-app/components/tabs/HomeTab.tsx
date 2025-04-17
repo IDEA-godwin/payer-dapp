@@ -1,7 +1,6 @@
 import { Eye, EyeClosedIcon } from "lucide-react";
 import RechargeList from "../sub-components/RechargeList";
 import { useState, useEffect } from "react";
-import { fetchState } from "@/contexts/useWarpContracts";
 
 const rechargeHistory = [
   {
