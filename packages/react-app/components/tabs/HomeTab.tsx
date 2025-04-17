@@ -1,9 +1,7 @@
 import { Eye, EyeClosedIcon } from "lucide-react";
 import RechargeList from "../sub-components/RechargeList";
 import { useState, useEffect } from "react";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { WalletButton } from "../ConnectWallet";
-import { useAccount, useBalance } from "wagmi";
+import { fetchState } from "@/contexts/useWarpContracts";
 
 const rechargeHistory = [
   {
@@ -74,19 +72,15 @@ const rechargeHistory = [
   },
 ];
 
-const HomeTab = ({ toggleRechargeMeter, isConnected }: { toggleRechargeMeter: any, isConnected: boolean }) => {
+const HomeTab = ({ toggleRechargeMeter, isConnected, contractTxId }: { toggleRechargeMeter: any, isConnected: boolean, contractTxId: string }) => {
+
   const [visibleHistory, setVisibleHistory] = useState<Array<any>>([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [isHidden, setIsHidden] = useState(false);
   const [showAll, setShowAll] = useState(false);
+  const [energyBalance, setEnergyBalance] = useState<number>(0);
   const [loading, setLoading] = useState(true);
-  const [balances, setBalances] = useState<Array<any>>([]);
 
-  const { address } = useAccount()
 
-  const balance = useBalance({
-    address
-  })
 
   // Simulate an API call to fetch Recharge History
   useEffect(() => {
@@ -161,9 +155,23 @@ const HomeTab = ({ toggleRechargeMeter, isConnected }: { toggleRechargeMeter: an
       ];
 
       setVisibleHistory(fetchedRechargeHistory);
-      setIsLoading(false); // Set loading to false after data is fetched
+      // Set loading to false after data is fetched
     }, 1000); // Simulate 1 second delay for the API call
   }, []);
+
+  useEffect(() => {
+    if (contractTxId) {
+      (async () => {
+        setLoading(true)
+        const res = await fetch("/api/fetch-state", {
+          headers: { 'Content-Type': 'application/json' },
+          method: 'PUT', body: JSON.stringify({ contractTxId })
+        })
+        console.log(await res.json())
+        setLoading(false)
+      })()
+    }
+  }, [contractTxId])
 
   const fetchedRechargeHistory = showAll
     ? rechargeHistory
@@ -171,19 +179,6 @@ const HomeTab = ({ toggleRechargeMeter, isConnected }: { toggleRechargeMeter: an
 
   // Simulated API call for balances
   // This is where you would fetch the actual data from  API
-  useEffect(() => {
-    setLoading(true);
-    console.log(balance.data)
-    setTimeout(() => {
-      setBalances([
-        { title: "Wallet Balance", amount: "$50.00" },
-        { title: "Meter Balance", amount: "120.00" },
-        { title: "Energy Balance", amount: "75.00 kWh" },
-      ]);
-      setLoading(false);
-    }, 1000); // 1 second delay
-  }, []);
-
 
   return (
     <div className="min-h-[70vh]">
@@ -223,10 +218,11 @@ const HomeTab = ({ toggleRechargeMeter, isConnected }: { toggleRechargeMeter: an
           <>
             {/* Top section */}
             <div className="flex justify-between items-center mb-5">
+
               <div className="text-left -space-y-1">
-                <p className="font-light">{balances[2].title}</p>
+                <p className="font-light">Energy Balance</p>
                 <p className="text-xl">
-                  {isHidden ? "****" : balances[2].amount}
+                  {isHidden ? "****" : energyBalance}
                 </p>
               </div>
               <span

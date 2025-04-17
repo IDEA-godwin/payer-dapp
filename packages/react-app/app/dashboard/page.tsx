@@ -14,6 +14,7 @@ import RechargeMeter from "@/components/RechargeMeter";
 import { useGlobalContext } from "@/contexts/GlobalContext";
 import { useAccount } from "wagmi";
 import { useRouter } from "next/navigation";
+import { useWeb3 } from "@/contexts/useWeb3";
 
 export default function Page() {
 
@@ -21,11 +22,13 @@ export default function Page() {
   const [width, setWidth] = useState(0);
 
   const { address, isConnected } = useAccount()
+  const [contractTxId, setContractTxId] = useState("")
 
   const [activeTab, setActiveTab] = useState("home");
   const [showRechargeMeter, setShowRechargeMeter] = useState(false);
 
   const { m3ter } = useGlobalContext();
+  const { getContractTxIdByToken } = useWeb3();
   const navigate = useRouter()
 
   const toggleRechargeMeter = () => {
@@ -33,7 +36,12 @@ export default function Page() {
   };
 
   useEffect(() => {
+    async function getM3terContractTxId(m3ter: any) {
+      const contractTxId: any = await getContractTxIdByToken(BigInt(m3ter));
+      setContractTxId(contractTxId)
+    }
     if (!m3ter) navigate.push("/link-meter")
+    getM3terContractTxId(m3ter)
     const updateWidth = () => {
       if (parentRef.current) {
         setWidth(parentRef.current.offsetWidth);
@@ -54,7 +62,7 @@ export default function Page() {
       case "profile":
         return <ProfileTab />;
       default:
-        return <HomeTab isConnected={isConnected} toggleRechargeMeter={toggleRechargeMeter} />;
+        return <HomeTab isConnected={isConnected} contractTxId={contractTxId} toggleRechargeMeter={toggleRechargeMeter} />;
     }
   };
 

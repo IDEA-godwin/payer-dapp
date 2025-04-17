@@ -8,6 +8,7 @@ import {
   custom,
   getContract,
   http,
+  parseAbi,
   parseEther,
   stringToHex,
 } from "viem";
@@ -65,6 +66,19 @@ export const useWeb3 = () => {
       args: [m3terId]
     })
     return !inActiveOwners.includes(owner)
+  }
+
+  const getContractTxIdByToken = async (m3terId: any) => {
+    let publicClient = createPublicClient({
+      chain: gnosis,
+      transport: http()
+    })
+    return await publicClient.readContract({
+      abi: parseAbi(["function contractByToken(uint256) view returns (string)"]),
+      address: "0x2b3997D82C836bd33C89e20fBaEF96CA99F1B24A",
+      functionName: "contractByToken",
+      args: [m3terId]
+    })
   }
 
   const sendCUSD = async (to: string, amount: string) => {
@@ -167,6 +181,7 @@ export const useWeb3 = () => {
     isMinipay,
     getRegisteredM3ters,
     checkIsActiveOwner,
+    getContractTxIdByToken,
     getUserAddress,
     sendCUSD,
     mintMinipayNFT,
