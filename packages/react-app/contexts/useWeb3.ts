@@ -64,7 +64,6 @@ export const useWeb3 = () => {
       functionName: "ownerOf",
       args: [m3terId]
     })
-    console.log(!inActiveOwners.includes(owner))
     return !inActiveOwners.includes(owner)
   }
 

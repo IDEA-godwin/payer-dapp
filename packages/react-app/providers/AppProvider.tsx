@@ -27,15 +27,15 @@ const connectors = connectorsForWallets(
   }
 );
 
-const config = getDefaultConfig({
-  // connectors: [
-  //   ...connectors,
-  //   walletConnect({
-  //     projectId: process.env.NEXT_PUBLIC_WC_PROJECT_ID ?? "",
-  //   })
-  // ],
-  appName: 'M3tering Payer',
-  projectId: process.env.NEXT_PUBLIC_WC_PROJECT_ID ?? '044601f65212332475a09bc14ceb3c34',
+const config = createConfig({
+  connectors: [
+    ...connectors,
+    walletConnect({
+      projectId: process.env.NEXT_PUBLIC_WC_PROJECT_ID ?? "",
+    })
+  ],
+  // appName: 'M3tering Payer',
+  // projectId: process.env.NEXT_PUBLIC_WC_PROJECT_ID ?? '044601f65212332475a09bc14ceb3c34',
   chains: [celo, gnosis, celoAlfajores],
   transports: {
     [celo.id]: http(),
