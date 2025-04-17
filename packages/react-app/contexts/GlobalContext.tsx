@@ -1,6 +1,6 @@
 'use client'
 
-import React, { createContext, PropsWithChildren, useContext } from "react";
+import React, { createContext, PropsWithChildren, useContext, useState } from "react";
 
 const GlobalContext = createContext<any>({});
 
@@ -11,7 +11,7 @@ export type Product = {
 }
 
 export const GlobalProvider = ({ children }: PropsWithChildren) => {
-  const meterId = "123456";
+  const [m3ter, setM3ter] = useState(0)
   const avatar = "images/robot.png";
   const products: Array<Product> = [
     { id: 1, name: "Product 1", image: "/images/shop/product1.png" },
@@ -23,8 +23,8 @@ export const GlobalProvider = ({ children }: PropsWithChildren) => {
   return (
     <GlobalContext.Provider
       value={{
-        meterId,
-        avatar,
+        setM3ter,
+        m3ter,
         products,
       }}
     >

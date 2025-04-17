@@ -79,7 +79,7 @@
     #b2d9f6 60%,
     #eff3fc 100%
   );
-  --text-orange-500: #f85a16;
+  --text-orange-500: ;
   --link-color: #f85a16;
   --primary-button-bg: var(--link-color);
   --primary-button-text: #ffffff;

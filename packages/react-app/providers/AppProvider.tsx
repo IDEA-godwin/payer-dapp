@@ -6,11 +6,13 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {
   RainbowKitProvider,
   connectorsForWallets,
+  getDefaultConfig,
 } from '@rainbow-me/rainbowkit';
 import { WagmiProvider, createConfig, http } from 'wagmi';
-import { celo, celoAlfajores } from 'wagmi/chains';
+import { celo, celoAlfajores, gnosis } from 'wagmi/chains';
+import { walletConnect } from 'wagmi/connectors'
 
-import { injectedWallet } from '@rainbow-me/rainbowkit/wallets';
+import { injectedWallet, walletConnectWallet } from '@rainbow-me/rainbowkit/wallets';
 
 const connectors = connectorsForWallets(
   [
@@ -21,16 +23,24 @@ const connectors = connectorsForWallets(
   ],
   {
     appName: 'M3tering Payer',
-    projectId: process.env.WC_PROJECT_ID ?? '044601f65212332475a09bc14ceb3c34',
+    projectId: process.env.NEXT_PUBLIC_WC_PROJECT_ID ?? '044601f65212332475a09bc14ceb3c34',
   }
 );
 
-const config = createConfig({
-  connectors,
-  chains: [celo, celoAlfajores],
+const config = getDefaultConfig({
+  // connectors: [
+  //   ...connectors,
+  //   walletConnect({
+  //     projectId: process.env.NEXT_PUBLIC_WC_PROJECT_ID ?? "",
+  //   })
+  // ],
+  appName: 'M3tering Payer',
+  projectId: process.env.NEXT_PUBLIC_WC_PROJECT_ID ?? '044601f65212332475a09bc14ceb3c34',
+  chains: [celo, gnosis, celoAlfajores],
   transports: {
     [celo.id]: http(),
     [celoAlfajores.id]: http(),
+    [gnosis.id]: http()
   },
 });
 

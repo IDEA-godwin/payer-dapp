@@ -13,8 +13,7 @@ export default function Home() {
         <h1 className="text-lg font-semibold leading-6">
           Welcome to{" "}
           <span
-            style={{ color: "#f85a16" }}
-            className=""
+            className="text-[#f85a16]"
           >
             M3tering Payer
           </span>

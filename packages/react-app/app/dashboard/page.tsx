@@ -12,26 +12,30 @@ import ProfileTab from "@/components/tabs/ProfileTab";
 import RechargeMeter from "@/components/RechargeMeter";
 
 import { useGlobalContext } from "@/contexts/GlobalContext";
+import { useAccount } from "wagmi";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
 
   const parentRef = useRef<HTMLDivElement | null>(null)
   const [width, setWidth] = useState(0);
 
+  const { address, isConnected } = useAccount()
+
   const [activeTab, setActiveTab] = useState("home");
   const [showRechargeMeter, setShowRechargeMeter] = useState(false);
 
-  const { meterId } = useGlobalContext();
-  const { avatar } = useGlobalContext();
+  const { m3ter } = useGlobalContext();
+  const navigate = useRouter()
 
   const toggleRechargeMeter = () => {
     setShowRechargeMeter(!showRechargeMeter);
   };
 
   useEffect(() => {
+    if (!m3ter) navigate.push("/link-meter")
     const updateWidth = () => {
       if (parentRef.current) {
-        console.log(parentRef.current.classList)
         setWidth(parentRef.current.offsetWidth);
       }
     };
@@ -40,8 +44,6 @@ export default function Page() {
     window.addEventListener('resize', updateWidth);
     return () => window.removeEventListener('resize', updateWidth);
   }, []);
-
-
 
   const renderActiveTab = () => {
     switch (activeTab) {
@@ -52,7 +54,7 @@ export default function Page() {
       case "profile":
         return <ProfileTab />;
       default:
-        return <HomeTab toggleRechargeMeter={toggleRechargeMeter} />;
+        return <HomeTab isConnected={isConnected} toggleRechargeMeter={toggleRechargeMeter} />;
     }
   };
 
@@ -61,7 +63,7 @@ export default function Page() {
 
   return (
     <div ref={parentRef} className="w-full flex flex-col items-center justify-between">
-      {(activeTab === "home" || activeTab === "profile") && <HeaderBar meterId={meterId} avatar={avatar} />}
+      {(activeTab === "home" || activeTab === "profile") && <HeaderBar m3ter={m3ter} />}
       <main className="flex-1 p-4 w-full mb-24 z-1">{renderActiveTab()}</main>
       <FooterNav width={width} activeTab={activeTab} setActiveTab={setActiveTab} />
     </div>

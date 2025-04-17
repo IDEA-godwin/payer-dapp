@@ -1,6 +1,9 @@
 import { Eye, EyeClosedIcon } from "lucide-react";
 import RechargeList from "../sub-components/RechargeList";
 import { useState, useEffect } from "react";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { WalletButton } from "../ConnectWallet";
+import { useAccount, useBalance } from "wagmi";
 
 const rechargeHistory = [
   {
@@ -71,13 +74,19 @@ const rechargeHistory = [
   },
 ];
 
-const HomeTab = ({ toggleRechargeMeter }: { toggleRechargeMeter: any }) => {
+const HomeTab = ({ toggleRechargeMeter, isConnected }: { toggleRechargeMeter: any, isConnected: boolean }) => {
   const [visibleHistory, setVisibleHistory] = useState<Array<any>>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isHidden, setIsHidden] = useState(false);
   const [showAll, setShowAll] = useState(false);
   const [loading, setLoading] = useState(true);
   const [balances, setBalances] = useState<Array<any>>([]);
+
+  const { address } = useAccount()
+
+  const balance = useBalance({
+    address
+  })
 
   // Simulate an API call to fetch Recharge History
   useEffect(() => {
@@ -164,6 +173,7 @@ const HomeTab = ({ toggleRechargeMeter }: { toggleRechargeMeter: any }) => {
   // This is where you would fetch the actual data from  API
   useEffect(() => {
     setLoading(true);
+    console.log(balance.data)
     setTimeout(() => {
       setBalances([
         { title: "Wallet Balance", amount: "$50.00" },
@@ -174,11 +184,12 @@ const HomeTab = ({ toggleRechargeMeter }: { toggleRechargeMeter: any }) => {
     }, 1000); // 1 second delay
   }, []);
 
+
   return (
-    <>
+    <div className="min-h-[70vh]">
       {/* Balance Section */}
-      <div className="bg-[#A53C0F] px-3 py-2 rounded-xl flex flex-col text-white min-h-[160px]">
-        {loading ? (
+      <div className="bg-[#A53C0F] px-3 py-2 rounded-xl flex flex-col text-white">
+        {!isConnected || loading ? (
           <div className="bg-[#A53C0F] px-3 py-2 rounded-xl animate-pulse">
             {/* Wallet Balance Section */}
             <div className="flex justify-between items-center mb-5">
@@ -213,9 +224,9 @@ const HomeTab = ({ toggleRechargeMeter }: { toggleRechargeMeter: any }) => {
             {/* Top section */}
             <div className="flex justify-between items-center mb-5">
               <div className="text-left -space-y-1">
-                <p className="font-light">{balances[0].title}</p>
-                <p className="text-2xl">
-                  {isHidden ? "****" : balances[0].amount}
+                <p className="font-light">{balances[2].title}</p>
+                <p className="text-xl">
+                  {isHidden ? "****" : balances[2].amount}
                 </p>
               </div>
               <span
@@ -225,36 +236,22 @@ const HomeTab = ({ toggleRechargeMeter }: { toggleRechargeMeter: any }) => {
                 {isHidden ? <EyeClosedIcon /> : <Eye />}
               </span>
             </div>
-
-            {/* Bottom section */}
-            <div className="flex justify-between items-center mt-5">
-              {/* <div>
-                <p className="font-light">{balances[1].title}</p>
-                <p className="text-xl">
-                  {isHidden ? "****" : balances[1].amount}
-                </p>
-              </div> */}
-              <div>
-                <p className="font-light">{balances[2].title}</p>
-                <p className="text-xl">
-                  {isHidden ? "****" : balances[2].amount}
-                </p>
-              </div>
-            </div>
           </>
         )}
       </div>
 
       {/* Recharge Meter Button */}
-      <div className="w-full mt-10">
-        <button
-          className="w-full py-6 cursor-pointer text-white bg-black border-[#123A77] border-[1px] rounded-xl flex flex-col items-center justify-between"
-          onClick={toggleRechargeMeter}
-        >
-          <img src="images/recharge.png" alt="recharge" />
-          <p>Recharge Meter</p>
-        </button>
-      </div>
+      {
+        isConnected && <div className="w-full mt-10">
+          <button
+            className="w-full py-6 cursor-pointer text-white bg-black border-[#123A77] border-[1px] rounded-xl flex flex-col items-center justify-between"
+            onClick={toggleRechargeMeter}
+          >
+            <img src="images/recharge.png" alt="recharge" />
+            <p>Recharge Meter</p>
+          </button>
+        </div>
+      }
 
       {/* Recent Transactions */}
       <div className="w-full mt-6">
@@ -264,20 +261,20 @@ const HomeTab = ({ toggleRechargeMeter }: { toggleRechargeMeter: any }) => {
             {showAll ? "See Less" : "See All"}
           </p>
         </div>
-        {isLoading ? (
+        {!isConnected || loading ? (
           <RechargeListLoading />
         ) : (
           <RechargeList visibleHistory={fetchedRechargeHistory} />
         )}
       </div>
-    </>
+    </div>
   );
 };
 
 function RechargeListLoading() {
   return (
     <div className="space-y-4">
-      {[...Array(4)].map((_, index) => (
+      {[...Array(2)].map((_, index) => (
         <div
           key={index}
           className="flex items-center justify-between p-2 rounded-xl animate-pulse bg-white/5"

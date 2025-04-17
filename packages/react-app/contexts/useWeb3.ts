@@ -1,6 +1,7 @@
 import { useState } from "react";
 import StableTokenABI from "./cusd-abi.json";
 import MinipayNFTABI from "./minipay-nft.json";
+import M3tersABI from "./m3ters.json"
 import {
   createPublicClient,
   createWalletClient,
@@ -10,7 +11,7 @@ import {
   parseEther,
   stringToHex,
 } from "viem";
-import { celoAlfajores } from "viem/chains";
+import { celoAlfajores, gnosis } from "viem/chains";
 
 const publicClient = createPublicClient({
   chain: celoAlfajores,
@@ -37,6 +38,35 @@ export const useWeb3 = () => {
       setAddress(address);
     }
   };
+
+  const getRegisteredM3ters = async () => {
+    let publicClient = createPublicClient({
+      chain: gnosis,
+      transport: http()
+    })
+    return publicClient.readContract({
+      abi: M3tersABI,
+      address: "0x39fb420Bd583cCC8Afd1A1eAce2907fe300ABD02",
+      functionName: "totalSupply",
+      args: []
+    })
+  }
+
+  const checkIsActiveOwner = async (m3terId: BigInt) => {
+    const inActiveOwners = ["0x311d93Fa56A1C1eBe35802f489051a69Cd4B1871", "0x083DD066a145ACC6eE5B12c08A216cE9540A5d7F"]
+    let publicClient = createPublicClient({
+      chain: gnosis,
+      transport: http()
+    })
+    const owner: any = await publicClient.readContract({
+      abi: M3tersABI,
+      address: "0x39fb420Bd583cCC8Afd1A1eAce2907fe300ABD02",
+      functionName: "ownerOf",
+      args: [m3terId]
+    })
+    console.log(!inActiveOwners.includes(owner))
+    return !inActiveOwners.includes(owner)
+  }
 
   const sendCUSD = async (to: string, amount: string) => {
     let walletClient = createWalletClient({
@@ -136,6 +166,8 @@ export const useWeb3 = () => {
   return {
     address,
     isMinipay,
+    getRegisteredM3ters,
+    checkIsActiveOwner,
     getUserAddress,
     sendCUSD,
     mintMinipayNFT,

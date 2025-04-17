@@ -1,103 +1,73 @@
 'use client'
 
 import { useEffect, useState } from "react";
-import { Loader2, Info } from "lucide-react";
-import { useGlobalContext } from "../../contexts/GlobalContext";
 import { useRouter } from "next/navigation";
 import { useWeb3 } from "@/contexts/useWeb3";
-import { stringify } from "flatted";
+import M3ter from "@/components/M3ter";
+import { useGlobalContext } from "@/contexts/GlobalContext";
 
 export default function Page() {
 
-  const [inputValue, setInputValue] = useState("");
+  // const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const { meterId } = useGlobalContext();
+  const [m3ters, setM3ters] = useState<number[] | undefined>(undefined);
 
-  const navigate = useRouter()
+  const navigate = useRouter();
+  const { setM3ter } = useGlobalContext()
 
-  const { isMinipay } = useWeb3()
+  const { checkIsActiveOwner, getRegisteredM3ters } = useWeb3();
+
+  let count = 0;
+
+  useEffect(() => {
+    (async () => {
+      const result: any = await getRegisteredM3ters();
+      const m3ters = Array.from({ length: Number(result) }, (_, i) => i)
+      const filtered = (await Promise.all(m3ters.map(async i => {
+        if (await checkIsActiveOwner(BigInt(i))) return i
+        else return 0
+      }))).filter(i => i)
+      setM3ters(filtered);
+    })()
+  }, [count])
 
 
-  const handleSubmit = () => {
+  const handleSubmit = (id: any) => {
     setIsLoading(true);
     setError("");
+    setM3ter(id)
+    navigate.push("/dashboard")
+    setIsLoading(false);
 
-    // Simulate API call
-    new Promise((resolve) => setTimeout(resolve, 1500))
-      .then(() => {
-        console.log(inputValue, meterId)
-        if (inputValue !== meterId) {
-          setError("Incorrect meter ID");
-        } else {
-          navigate.push("/dashboard");
-        }
-      })
-      .catch(() => {
-        setError("Failed to verify meter ID");
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    // // Simulate API call
+    // new Promise((resolve) => setTimeout(resolve, 1500))
+    //   .then(() => {
+    //   })
+    //   .catch(() => {
+    //     setError("Failed to verify meter ID");
+    //   })
+    //   .finally(() => {
+    //   });
   };
-
-  //   style = {{
-  //     backgroundColor:
-  //     error && !isDark ? "#E8CE88" : "var(--background-color)",
-  //       color: "var(--text-color)",
-  //       }
-  // }
-  //   style = {{
-  //     backgroundColor: isDark ? "#373737" : "#CACACA",
-  //       border: error ? "#DB8F87 solid 1px" : "none",
-  //         color: "var(--text-color)",
-  //           }
-  // }
 
   return (
     <div
-      className="min-h-screen flex flex-col items-center justify-between px-5 py-12"
+      className="min-h-screen flex flex-col items-center gap-y-4 px-5 py-12"
     >
       <div className="text-left w-full">
-        <h2 className="text-xl font-bold">
-          Get <span style={{ color: "var(--link-color)" }}>started</span> {isMinipay ? " Minipay User" : "User"}
+        <h2 className="text-2xl font-bold">
+          Get <span style={{ color: "var(--link-color)" }}>started</span>
         </h2>
-        <p className="text-sm mt-2" style={{ color: "var(--text-color)" }}>
-          {"Link your meter and start managing your energy usage"}
+        <p className="text-md mt-2 text-[#1a1a1a]">
+          Link your meter and start managing your energy usage; <span className="text-[#cc440a]">Select your M3ter to proceed.</span>
         </p>
-        <input
-          type="text"
-          value={inputValue}
-          placeholder="Enter meter ID"
-          maxLength={10}
-          pattern="[0-9]*"
-          inputMode="numeric"
-          onChange={(e) => {
-            setInputValue(e.target.value);
-            setError("");
-          }}
-          className="w-full p-2 mt-4 border-none outline-none text-center rounded-xl"
-        />
-        {error && (
-          <p className="text-red-500 text-sm mt-1">
-            <Info className="inline mr-1" />
-            {error}
-          </p>
-        )}
       </div>
-      <div />
-      <button
-        className="flex items-center justify-center bg-[#221F1F] text-white font-semibold py-3 px-6 rounded-xl w-full text-center shadow-md cursor-pointer"
-        disabled={!inputValue}
-        onClick={handleSubmit}
-      >
-        {isLoading ? (
-          <>
-            <Loader2 className="animate-spin -ml-1 mr-2 h-4 w-4" />
-            {"Link meter"}
-          </>
-        ) : ("Link meter")}
-      </button>
+      <div className="flex flex-wrap m-auto gap-4">
+        {m3ters && m3ters.map((i) => (
+          <M3ter handleClick={handleSubmit} isLoading={isLoading} key={`${i}`} seed={i} />
+        ))}
+      </div>
     </div>
   );
 }
