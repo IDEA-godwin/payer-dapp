@@ -160,7 +160,7 @@ const ShopTab = () => {
               setSelectedProduct(product);
               setCurrentIndex(0);
             }}
-            className="cursor-pointer group"
+            className="cursor-pointer  hover:scale-105 duration-300"
           >
             <div className="aspect-square overflow-hidden rounded-lg bg-gray-100">
               <img

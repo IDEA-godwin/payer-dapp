@@ -1,4 +1,4 @@
-
-
-.env
-node_modules
+# Ignore only node_modules and build outputs
+packages/web/node_modules/
+packages/web/dist/
+packages/web/.env

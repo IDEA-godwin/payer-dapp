@@ -1,14 +1,14 @@
 import { useNavigate } from "react-router-dom";
-
-const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+import { useGlobalContext } from "../context/GlobalContext";
 
 export function WelcomeScreen() {
   const navigate = useNavigate();
+  const { isDarkMode } = useGlobalContext();
   return (
     <div
       className="min-h-screen flex flex-col items-center justify-between px-6 py-12"
       style={{
-        backgroundImage: isDark
+        backgroundImage: isDarkMode
           ? "var(--background-color)"
           : "var(--linear-light-bg)",
         color: "var(--text-color)",
