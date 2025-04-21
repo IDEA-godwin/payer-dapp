@@ -1,6 +1,7 @@
 import { Eye, EyeClosedIcon } from "lucide-react";
 import RechargeList from "../sub-components/RechargeList";
 import { useState, useEffect } from "react";
+import { fetchState } from "@/contexts/useWarpContracts";
 
 const rechargeHistory = [
   {
@@ -160,15 +161,13 @@ const HomeTab = ({ toggleRechargeMeter, isConnected, contractTxId }: { toggleRec
 
   useEffect(() => {
     if (contractTxId) {
-      (async () => {
-        setLoading(true)
-        const res = await fetch("/api/fetch-state", {
-          headers: { 'Content-Type': 'application/json' },
-          method: 'PUT', body: JSON.stringify({ contractTxId })
+      setLoading(true)
+      fetchState(contractTxId)
+        .then((res: any) => {
+          console.log(res)
+          setEnergyBalance(res?.state.kwh_balance)
+          setLoading(false)
         })
-        console.log(await res.json())
-        setLoading(false)
-      })()
     }
   }, [contractTxId])
 

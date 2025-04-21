@@ -52,6 +52,12 @@ importers:
       lucide-react:
         specifier: ^0.454.0
         version: 0.454.0(react@18.3.1)
+      m3tering-ed25519:
+        specifier: ^1.0.2
+        version: 1.0.2(warp-contracts@1.4.45)
+      m3tering-ethers:
+        specifier: ^1.0.2
+        version: 1.0.2(bufferutil@4.0.9)(utf-8-validate@5.0.10)(warp-contracts@1.4.45)
       m3ters:
         specifier: ^1.0.6
         version: 1.0.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -80,7 +86,7 @@ importers:
         specifier: 2.12.25
         version: 2.12.25(@tanstack/query-core@5.62.16)(@tanstack/react-query@5.63.0(react@18.3.1))(@types/react@18.3.18)(bufferutil@4.0.9)(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.6(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(typescript@5.7.3)(utf-8-validate@5.0.10)(viem@2.21.34(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10))
       warp-contracts:
-        specifier: ^1.4.45
+        specifier: ^1.4.41
         version: 1.4.45
     devDependencies:
       '@types/node':
@@ -3439,6 +3445,18 @@ packages:
     resolution: {integrity: sha512-hw7zMDwykCLnEzgncEEjHeA6+45aeEzRYuKHuyRSOPkhko+J3ySGjGIzu+mmMfDFG1vazHepMaYFYHbTFAZAAQ==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0-rc
+
+  m3tering-ed25519@1.0.2:
+    resolution: {integrity: sha512-B8t+QiegqGIQPBs4f+yXR1gxfdSd52ihQ+FdZr+Yx6IQ76pELlmf7RbploaFa5w132AujQBW6Ei3Ljw+9PLFlg==}
+    engines: {node: '>=16.5'}
+    peerDependencies:
+      warp-contracts: ^1.4.41
+
+  m3tering-ethers@1.0.2:
+    resolution: {integrity: sha512-KYLum9g5OIDrG3+UAJE9z1RwlXIWCHyLFIZeg9I5V4mZityC+dSOOrLh5cbqICi93qCA6k59A0pvla3gTfSl2w==}
+    engines: {node: '>=16.5'}
+    peerDependencies:
+      warp-contracts: ^1.4.41
 
   m3ters@1.0.6:
     resolution: {integrity: sha512-x6Dvokj96A1Wq9EWORBv512hxU39oD+mt5c5TaN6bIeuztWeTjfWVO95g+wk9P4Q3Dm1uxtkuEaHm5lCy8fy5A==}
@@ -9465,6 +9483,19 @@ snapshots:
   lucide-react@0.454.0(react@18.3.1):
     dependencies:
       react: 18.3.1
+
+  m3tering-ed25519@1.0.2(warp-contracts@1.4.45):
+    dependencies:
+      '@stablelib/ed25519': 1.0.3
+      warp-contracts: 1.4.45
+
+  m3tering-ethers@1.0.2(bufferutil@4.0.9)(utf-8-validate@5.0.10)(warp-contracts@1.4.45):
+    dependencies:
+      ethers: 6.13.5(bufferutil@4.0.9)(utf-8-validate@5.0.10)
+      warp-contracts: 1.4.45
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
 
   m3ters@1.0.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:

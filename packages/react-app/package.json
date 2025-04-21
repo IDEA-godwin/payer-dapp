@@ -32,7 +32,9 @@
     "tailwindcss-animate": "^1.0.7",
     "viem": "2.21.34",
     "wagmi": "2.12.25",
-    "warp-contracts": "^1.4.45"
+    "warp-contracts": "^1.4.41",
+    "m3tering-ed25519": "^1.0.2",
+    "m3tering-ethers": "^1.0.2"
   },
   "devDependencies": {
     "@types/node": "^22.7.9",
