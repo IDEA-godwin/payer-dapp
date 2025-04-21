@@ -1,4 +1,7 @@
+import { useGlobalContext } from "../../context/GlobalContext";
+
 const ConnectWallet = ({ toggleModal }) => {
+  const { isDarkMode } = useGlobalContext();
   return (
     <div
       className="fixed inset-0 bg-[rgba(2,13,30,0.5)] bg-opacity-50 flex items-center justify-center z-50"
@@ -7,6 +10,9 @@ const ConnectWallet = ({ toggleModal }) => {
     >
       <div
         className="bg-[#1B2546] p-7 px-9 rounded-xl w-80"
+        style={{
+          color: isDarkMode ? "#ffffff" : "#fff",
+        }}
         onClick={(e) => e.stopPropagation()}
       >
         <p className="font-extrabold  mb-10">

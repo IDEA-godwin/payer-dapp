@@ -7,25 +7,21 @@ import {
   PhoneCallIcon,
 } from "lucide-react";
 import { useGlobalContext } from "../../context/GlobalContext";
-import { useState } from "react";
 
 export default function ProfileTab() {
-  const { meterId, avatar } = useGlobalContext();
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Handle Dark Mode Toggle
-  const handleDarkMode = () => {
-    setIsDarkMode((prev) => !prev);
-    // Optionally you can also handle actual theme switch logic here
-    // Example: document.body.classList.toggle('dark', !isDarkMode);
-  };
+  const { meterId, avatar, isDarkMode, handleDarkMode } = useGlobalContext();
 
   const handleOptionClick = (option) => {
     console.log("option clicked", option);
   };
 
   return (
-    <div className="h-[70vh] text-white">
+    <div
+      className="h-[70vh]"
+      style={{
+        color: isDarkMode ? "#fff" : "#000",
+      }}
+    >
       <div className="flex flex-col items-center -mt-24">
         <div className="w-40 h-auto rounded-full p-1 overflow-hidden">
           <img
@@ -38,15 +34,20 @@ export default function ProfileTab() {
       </div>
 
       {/* Options */}
-      <div className="mt-14 px-4 py-6 rounded-2xl space-y-5 bg-[#425183] profile-bg shadow-[0_0_60px_10px_rgba(66,81,131,0.99)]">
+      <div
+        className="mt-14 px-4 py-6 rounded-2xl space-y-5 bg-[#425183] profile-bg shadow-[]"
+        style={{
+          boxShadow: isDarkMode ? "0 0 60px 10px rgba(66,81,131,0.99)" : "",
+        }}
+      >
         <Option
           icon={<UserPenIcon size={18} />}
           label="Replace meter"
           onClick={() => handleOptionClick("replace")}
         />
         <Option
-          icon={isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
-          label={isDarkMode ? "Light mode" : "Dark mode"}
+          icon={isDarkMode ? <Moon size={18} /> : <Sun size={18} />}
+          label={"Dark mode"}
           trailing={
             <label className="inline-flex items-center cursor-pointer">
               <input
@@ -62,9 +63,9 @@ export default function ProfileTab() {
                   }`}
                 >
                   {isDarkMode ? (
-                    <Sun size={18} className="text-black" />
-                  ) : (
                     <Moon size={18} />
+                  ) : (
+                    <Sun size={18} className="text-black" />
                   )}
                 </span>
               </div>
@@ -92,8 +93,8 @@ function Option({ icon, label, trailing, onClick }) {
       className="group flex select-none justify-between items-center hover:bg-white/10 p-2 rounded-lg transition cursor-pointer"
       onClick={onClick}
     >
-      <div className="flex items-center space-x-3 text-orange-400">
-        <span className=" ">{icon}</span>
+      <div className="flex items-center space-x-3 ">
+        <span className=" text-white">{icon}</span>
         <span className="text-sm text-white">{label}</span>
       </div>
       {trailing || (
