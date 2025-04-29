@@ -88,7 +88,7 @@
 }
 
 .bg-primary {
-  background: linear-gradient(167.99deg, #64A5EF 0%, #D5DBEE 100%);
+  background: linear-gradient(167.99deg, #64A5EF 20%, #D5DBEE 80%);
 }
 
 /* Default to light mode */

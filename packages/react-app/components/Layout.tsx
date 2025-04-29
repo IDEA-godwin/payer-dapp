@@ -9,7 +9,7 @@ const Layout: FC<Props> = ({ children, loading }) => {
   return (
     <>
       {loading && <Loading />}
-      <div className="bg-primary">
+      <div className="h-screen">
         {children}
       </div>
     </>

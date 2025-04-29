@@ -1,7 +1,6 @@
 import { Eye, EyeClosedIcon } from "lucide-react";
 import RechargeList from "../sub-components/RechargeList";
 import { useState, useEffect } from "react";
-import { fetchState } from "@/contexts/useWarpContracts";
 
 const rechargeHistory = [
   {
@@ -155,34 +154,20 @@ const HomeTab = ({ toggleRechargeMeter, isConnected, contractTxId }: { toggleRec
       ];
 
       setVisibleHistory(fetchedRechargeHistory);
+      setLoading(false)
       // Set loading to false after data is fetched
     }, 1000); // Simulate 1 second delay for the API call
   }, []);
-
-  useEffect(() => {
-    if (contractTxId) {
-      setLoading(true)
-      fetchState(contractTxId)
-        .then((res: any) => {
-          console.log(res)
-          setEnergyBalance(res?.state.kwh_balance)
-          setLoading(false)
-        })
-    }
-  }, [contractTxId])
 
   const fetchedRechargeHistory = showAll
     ? rechargeHistory
     : rechargeHistory.slice(0, 4);
 
-  // Simulated API call for balances
-  // This is where you would fetch the actual data from  API
-
   return (
-    <div className="min-h-[70vh]">
+    <div className="">
       {/* Balance Section */}
       <div className="bg-[#A53C0F] px-3 py-2 rounded-xl flex flex-col text-white">
-        {!isConnected || loading ? (
+        {loading ? (
           <div className="bg-[#A53C0F] px-3 py-2 rounded-xl animate-pulse">
             {/* Wallet Balance Section */}
             <div className="flex justify-between items-center mb-5">
@@ -236,7 +221,7 @@ const HomeTab = ({ toggleRechargeMeter, isConnected, contractTxId }: { toggleRec
 
       {/* Recharge Meter Button */}
       {
-        isConnected && <div className="w-full mt-10">
+        <div className="w-full mt-10">
           <button
             className="w-full py-6 cursor-pointer text-white bg-black border-[#123A77] border-[1px] rounded-xl flex flex-col items-center justify-between"
             onClick={toggleRechargeMeter}
@@ -255,7 +240,7 @@ const HomeTab = ({ toggleRechargeMeter, isConnected, contractTxId }: { toggleRec
             {showAll ? "See Less" : "See All"}
           </p>
         </div>
-        {!isConnected || loading ? (
+        {loading ? (
           <RechargeListLoading />
         ) : (
           <RechargeList visibleHistory={fetchedRechargeHistory} />
